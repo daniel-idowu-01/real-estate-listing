@@ -3,7 +3,6 @@ import Header from '../components/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice'
-import { sign } from 'jsonwebtoken'
 
 const SignIn = () => {
 
@@ -61,73 +60,73 @@ const SignIn = () => {
   return (
     <section>
       <Header />
-      <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
-        <article class="sm:mx-auto sm:w-full sm:max-w-sm">
-          <h2 class={headerStyle}>
+      <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
+        <article className="sm:mx-auto sm:w-full sm:max-w-sm">
+          <h2 className={headerStyle}>
             Sign In
           </h2>
         </article>
 
-        <article class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
+        <article className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
           <form
-           class="space-y-6"
+           className="space-y-6"
            action="#" 
            method="POST"
            onSubmit={handleSubmit}
           >
             <div>
               <label
-               for="email" 
-               class={labelStyle}>
+               htmlFor="email" 
+               className={labelStyle}>
                 Email address
               </label>
-              <div class="mt-2">
+              <div className="mt-2">
                 <input 
                  required 
                  id="email" 
                  type="email" 
                  name="email" 
-                 autocomplete="email"
+                 autoComplete="email"
                  onChange={handleChange}
-                 class={inputStyle} 
+                 className={inputStyle} 
                  />
               </div>
             </div>
 
             <div>
-              <div class="flex items-center justify-between">
+              <div className="flex items-center justify-between">
                 <label
-                 for="password" 
-                 class={labelStyle}>
+                 htmlFor="password" 
+                 className={labelStyle}>
                   Password
                 </label>
                 
               </div>
-              <div class="mt-2">
+              <div className="mt-2">
                 <input 
                  required 
                  id="password" 
                  name="password" 
                  type="password" 
-                 autocomplete="current-password" 
+                 autoComplete="current-password" 
                  onChange={handleChange}
-                 class={inputStyle} 
+                 className={inputStyle} 
                  />
               </div>
             </div>
 
             <div>
-              <button disabled={isLoading} type="submit" class={submitBtn}>
+              <button disabled={isLoading} type="submit" className={submitBtn}>
                 {isLoading ? 'Loading...' : 'Sign In'}
               </button>
             </div>
           </form>
 
-          <p class="mt-10 text-center text-sm text-gray-500">
+          <p className="mt-10 text-center text-sm text-gray-500">
             Dont have an account?
             <Link
              to='/sign-up' 
-             class="ml-1 font-semibold leading-6 text-navy-blue hover:underline"
+             className="ml-1 font-semibold leading-6 text-navy-blue hover:underline"
              >
               Sign Up
             </Link>
