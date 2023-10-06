@@ -1,8 +1,51 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
 
 const SignOut = () => {
+
+  const [formData, setFormData] = useState({})
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
+  const navigate = useNavigate();
+
+  // to update user inputs
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    })
+  }
+
+  // to submit form data
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      setIsLoading(true)
+      const response = await fetch('/api/auth/signup', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+      });
+
+      const data = await response.json();
+      if(data.success === false ) {
+        setIsLoading(false);
+        setError(data.message);
+        return; 
+      }
+      setIsLoading(false);
+      setError(null);
+      navigate('/sign-in')
+    } catch (error) {
+      setIsLoading(false);
+      setError(error.message);
+    }
+    
+  }
 
   // styles
   const labelStyle = "block text-sm font-medium leading-6 text-gray-900"
@@ -24,7 +67,12 @@ const SignOut = () => {
         </article>
 
         <article class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form class="space-y-6" action="#" method="POST">
+          <form
+           class="space-y-6"
+           action="#" 
+           method="POST"
+           onSubmit={handleSubmit}
+          >
           <div>
               <label
                for="email" 
@@ -37,7 +85,8 @@ const SignOut = () => {
                  type="text" 
                  id="username" 
                  name="username" 
-                 autocomplete="username" 
+                 autocomplete="username"
+                 onChange={handleChange}
                  class={inputStyle} 
                  />
               </div>
@@ -55,7 +104,8 @@ const SignOut = () => {
                  id="email" 
                  type="email" 
                  name="email" 
-                 autocomplete="email" 
+                 autocomplete="email"
+                 onChange={handleChange}
                  class={inputStyle} 
                  />
               </div>
@@ -77,13 +127,16 @@ const SignOut = () => {
                  name="password" 
                  type="password" 
                  autocomplete="current-password" 
+                 onChange={handleChange}
                  class={inputStyle} 
                  />
               </div>
             </div>
 
             <div>
-              <button type="submit" class={submitBtn}>Sign Up</button>
+              <button disabled={isLoading} type="submit" class={submitBtn}>
+                {isLoading ? 'Loading...' : 'Sign Up'}
+              </button>
             </div>
           </form>
 
@@ -109,7 +162,9 @@ const SignOut = () => {
             <a href="#" class="font-semibold leading-6 text-navy-blue hover:underline">Start a 14 day free trial</a>
           </p> */}
         </article>
+        {error && <p className='text-red-500'>{error}</p>}
       </div>
+
     </section>
     
   )
