@@ -141,26 +141,15 @@ const SignOut = () => {
           </form>
 
           <p class="mt-10 text-center text-sm text-gray-500">
-            Already a member?
+           Have an account?
             <Link
-             to='/sign-up' 
+             to='/sign-in' 
              class="ml-1 font-semibold leading-6 text-navy-blue hover:underline"
              >
               Log In
             </Link>
           </p>
 
-          {/* 
-
-          <div class="text-sm">
-            <a href="#" class="font-semibold text-navy-blue hover:underline">Forgot password?</a>
-          </div>
-
-
-          <p class="mt-10 text-center text-sm text-gray-500">
-            Not a member?
-            <a href="#" class="font-semibold leading-6 text-navy-blue hover:underline">Start a 14 day free trial</a>
-          </p> */}
         </article>
         {error && <p className='text-red-500'>{error}</p>}
       </div>
