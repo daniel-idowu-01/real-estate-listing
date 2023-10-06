@@ -1,13 +1,16 @@
 import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
 import Header from '../components/Header'
+import { useDispatch, useSelector } from 'react-redux'
+import { Link, useNavigate } from 'react-router-dom'
+import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice'
+import { sign } from 'jsonwebtoken'
 
 const SignIn = () => {
 
   const [formData, setFormData] = useState({})
-  const [isLoading, setIsLoading] = useState(false)
-  const [error, setError] = useState(null)
+  const {isLoading, error} = useSelector((state) => state.user)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   // to update user inputs
   const handleChange = (e) => {
@@ -22,7 +25,7 @@ const SignIn = () => {
     e.preventDefault();
 
     try {
-      setIsLoading(true)
+      dispatch(signInStart())
       const response = await fetch('/api/auth/signin', {
         method: 'POST',
         headers: {
@@ -33,12 +36,10 @@ const SignIn = () => {
 
       const data = await response.json();
       if(data.success === false ) {
-        setIsLoading(false);
-        setError(data.message);
+        dispatch(signInFailure(data.message))
         return; 
       }
-      setIsLoading(false);
-      setError(null);
+      dispatch(signInSuccess(data))
       navigate('/')
     } catch (error) {
       setIsLoading(false);
