@@ -3,8 +3,6 @@ import { Home, About, SignIn, SignOut, Profile } from './pages'
 
 function App() {
 
-  console.log(2)
-
   return (
     <BrowserRouter>
       <Routes>

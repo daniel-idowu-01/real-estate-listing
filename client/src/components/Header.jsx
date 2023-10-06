@@ -29,7 +29,7 @@ const Header = () => {
         <ul className='flex gap-8'>
             <Link to='/' className='hidden sm:block'>
                 <li className='hover:cursor-pointer'>Home</li>
-            </Link>~
+            </Link>
 
             <Link to='/about' className='hidden sm:block'>
                 <li>About</li>
