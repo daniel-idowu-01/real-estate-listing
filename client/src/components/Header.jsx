@@ -1,8 +1,12 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { FaSearch } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
 
 const Header = () => {
+
+  const { currentUser } = useSelector(state => state.user)
+
   return (
     <header className='shadow-sm px-10 md:px-20'>
 
@@ -26,17 +30,24 @@ const Header = () => {
              <FaSearch />
         </form>
 
-        <ul className='flex gap-8'>
-            <Link to='/' className='hidden sm:block'>
+        <ul className='flex items-center gap-8'>
+            <Link to='/' className='hidden sm:block hover:underline'>
                 <li className='hover:cursor-pointer'>Home</li>
             </Link>
 
-            <Link to='/about' className='hidden sm:block'>
+            <Link to='/about' className='hidden sm:block hover:underline'>
                 <li>About</li>
             </Link>
 
-            <Link to='/sign-in'>
-                <li>Sign In</li>
+            <Link to='/profile'>
+              {currentUser
+                ? 
+                  <img className='w-10 h-10 rounded-full object-cover' src={currentUser.avatar} alt="profile" />
+                :
+                  
+                  <li className='hover:underline'>Sign In</li>
+                  
+                }
             </Link>
         </ul>
       </div>

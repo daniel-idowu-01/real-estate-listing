@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import Header from '../components/Header'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { signInStart, signInSuccess, signInFailure } from '../redux/user/userSlice'
@@ -59,7 +58,6 @@ const SignIn = () => {
 
   return (
     <section>
-      <Header />
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <article className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className={headerStyle}>

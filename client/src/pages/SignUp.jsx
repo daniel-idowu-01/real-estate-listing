@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import Header from '../components/Header'
 
 const SignOut = () => {
 
@@ -58,7 +57,6 @@ const SignOut = () => {
 
   return (
     <section>
-      <Header />
       <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
         <article className="sm:mx-auto sm:w-full sm:max-w-sm">
           <h2 className={headerStyle}>
